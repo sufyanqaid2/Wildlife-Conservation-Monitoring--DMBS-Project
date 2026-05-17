@@ -70,7 +70,9 @@ The database contains the following main tables:
 
 7. **threats**  
    Stores reported threats in protected zones, including threat type, severity, report date, and resolved status.
-
+   
+9. reports
+Stores and displays management reports from the database, including animal distribution, health statistics, threat reports, sighting summaries, conservation alerts, and procedure/function results.
 ---
 
 ## Technologies Used
