@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sightings</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body data-page="sightings">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><div class="logo-circle">🦌</div><div><h2>WCMDMS</h2><p>Wildlife Conservation<br>Monitoring Database<br>Management System</p></div></div>
+      <nav class="nav">
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="animals.html">🐾 Animals</a>
+        <a href="health_records.html">💓 Health Records</a>
+        <a class="active" href="sightings.html">🔭 Sightings</a>
+        <a href="threats.html">⚠️ Threats</a>
+        <a href="rangers.html">👤 Rangers</a>
+        <a href="zones.html">📍 Zones</a>
+        <a href="users.html">👥 Users & Roles</a>
+        <a href="reports.html">📊 Reports</a>
+      </nav>
+      <div class="profile-box"><div class="avatar">👤</div><div><b class="current-user-name">admin1</b><p class="current-user-role">Administrator</p></div></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="page-title"><h1>🔭 Sightings</h1><p>Manage animal sightings recorded by rangers.</p></div>
+        <div class="top-actions">
+          <span id="currentDate">📅 Loading date...</span>
+          <button class="btn btn-outline" onclick="logout()">Logout</button>
+        </div>
+      </header>
+
+      <section class="toolbar">
+        <input id="sightingSearch" class="form-control search-input" placeholder="Search sightings..." />
+        <button class="btn">Filter</button>
+        
+      </section>
+
+      <section class="grid-2">
+        <div class="table-card">
+          <div class="table-header"><h3>🔭 Sightings List</h3></div>
+
+          <table id="sightingsTable">
+            <thead>
+              <tr><th>sighting_id</th><th>Animal</th><th>Zone</th><th>Reported By</th><th>sighting_date</th><th>notes</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="sightingsBody"></tbody>
+          </table>
+        </div>
+
+        <div class="form-card">
+          <h3>Add / Edit Sighting</h3>
+
+          <form id="sightingForm" data-table="sightings">
+            <div class="form-group">
+              <label>sighting_id</label>
+              <input name="sighting_id" class="form-control" placeholder="Auto-generated" disabled />
+            </div>
+
+            <div class="form-group">
+              <label>animal_id</label>
+              <select id="animalSelect" name="animal_id" class="form-control" required>
+                <option value="">Select animal</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>zone_id</label>
+              <select id="zoneSelect" name="zone_id" class="form-control" required>
+                <option value="">Select zone</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+             <label>reported_by</label>
+            <select id="reporterSelect" name="user_id" class="form-control" required>
+              <option value="">Select reporter</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>sighting_date</label>
+              <input name="sighting_date" type="date" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+              <label>notes</label>
+              <textarea name="notes" class="form-control" placeholder="Enter sighting notes"></textarea>
+            </div>
+
+            <div class="form-buttons">
+              <button class="btn" type="button" data-clear>Cancel</button>
+              <button class="btn btn-primary" type="submit">Save Sighting</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <footer class="footer"><span>© 2026 Wildlife Conservation Monitoring Database Management System.</span><span>WCMDMS v1.0.0 🌿</span></footer>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>

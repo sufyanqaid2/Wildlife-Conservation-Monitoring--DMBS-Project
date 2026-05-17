@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WCMDMS Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body data-page="login">
+  <div class="login-page">
+
+    <section class="login-left">
+      <div class="login-logo">
+        <div class="big-icon">🦌</div>
+        <div>
+          <h2>Wildlife Conservation</h2>
+          <p>Monitoring Database<br>Management System</p>
+        </div>
+      </div>
+
+      <h1>
+        Protect <span>Wildlife.</span><br>
+        Preserve Our Future.
+      </h1>
+
+      <div class="green-line"></div>
+
+      <p>
+        A unified platform for monitoring, protecting, and managing wildlife
+        and natural habitats for a sustainable tomorrow.
+      </p>
+
+      <div class="login-badge">
+        <div style="font-size:36px;">🛡</div>
+        <div>
+          <h3>Secure. Reliable. Impactful.</h3>
+          <p>Data-driven conservation for a better planet.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="login-right">
+      <div class="login-card">
+        <div class="lock-icon">🔒</div>
+
+        <h2>Welcome Back!</h2>
+        <p class="subtitle">Only database users can access the system</p>
+
+        <form id="loginForm">
+          <div class="form-group">
+            <label>Username or Email</label>
+            <input
+              id="loginUsername"
+              class="form-control"
+              placeholder="Enter username or email"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <input
+              id="loginPassword"
+              type="password"
+              class="form-control"
+              placeholder="Enter password"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Role</label>
+            <select id="loginRole" class="form-control" required>
+              <option value="">Select your role</option>
+              <option value="admin">admin</option>
+              <option value="ranger">ranger</option>
+              <option value="researcher">researcher</option>
+              <option value="viewer">viewer</option>
+            </select>
+          </div>
+
+          <button class="login-btn" type="submit">Login →</button>
+        </form>
+
+        <p style="text-align:center;margin-top:28px;color:#6b7280;">
+          Login must match username/email, password.
+        </p>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>

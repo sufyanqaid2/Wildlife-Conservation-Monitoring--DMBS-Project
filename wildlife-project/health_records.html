@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Health Records</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body data-page="health_records">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><div class="logo-circle">🦌</div><div><h2>WCMDMS</h2><p>Wildlife Conservation<br>Monitoring Database<br>Management System</p></div></div>
+      <nav class="nav">
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="animals.html">🐾 Animals</a>
+        <a class="active" href="health_records.html">💓 Health Records</a>
+        <a href="sightings.html">🔭 Sightings</a>
+        <a href="threats.html">⚠️ Threats</a>
+        <a href="rangers.html">👤 Rangers</a>
+        <a href="zones.html">📍 Zones</a>
+        <a href="users.html">👥 Users & Roles</a>
+        <a href="reports.html">📊 Reports</a>
+      </nav>
+      <div class="profile-box"><div class="avatar">👤</div><div><b class="current-user-name">admin1</b><p class="current-user-role">Administrator</p></div></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="page-title"><h1>Health Records 💓</h1><p>Manage and track the health check records of all registered animals.</p></div>
+        <div class="top-actions">
+          <span id="currentDate">📅 Loading date...</span>
+          <button class="btn btn-outline" onclick="logout()">Logout</button>
+        </div>
+      </header>
+
+      <section class="cards">
+        <div class="card stat-card"><div class="stat-icon blue">➕</div><div><h3>9</h3><p>Total Records<br></p></div></div>
+        <div class="card stat-card"><div class="stat-icon green">💓</div><div><h3>6</h3><p>Healthy<br></p></div></div>
+        <div class="card stat-card"><div class="stat-icon orange">🩹</div><div><h3>2</h3><p>Injured<br></p></div></div>
+        <div class="card stat-card"><div class="stat-icon purple">🔄</div><div><h3>1</h3><p>Recovering<br></p></div></div>
+        <div class="card stat-card"><div class="stat-icon red">🌡</div><div><h3>1</h3><p>Sick<br></p></div></div>
+      </section>
+
+      <section class="toolbar">
+        <input id="healthSearch" class="form-control search-input" placeholder="🔍 Search by animal name, notes..." />
+        <button onclick="location.reload()" class="btn">Clear Filters</button>
+      </section>
+
+      <section class="grid-2">
+        <div class="table-card">
+          <div class="table-header"><h3>☰ Health Records</h3></div>
+
+          <table id="healthTable">
+            <thead>
+              <tr><th>record_id</th><th>Animal</th><th>check_date</th><th>health_status</th><th>weight_kg</th><th>notes</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="healthBody"></tbody>
+          </table>
+        </div>
+
+        <div class="form-card">
+          <h3>💓 Add / Edit Health Record</h3>
+
+          <form id="healthForm" data-table="health_records">
+            <div class="form-group">
+              <label>Record ID</label>
+              <input name="record_id" class="form-control" placeholder="Auto-generated" disabled />
+            </div>
+
+            <div class="form-group">
+              <label>Animal</label>
+              <select id="animalSelect" name="animal_id" class="form-control" required>
+                <option value="">Select an animal</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Check Date</label>
+              <input name="check_date" type="date" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+              <label>Health Status</label>
+              <select name="health_status" class="form-control" required>
+                <option value="">Select status</option>
+                <option>healthy</option>
+                <option>injured</option>
+                <option>recovering</option>
+                <option>sick</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Weight (kg)</label>
+              <input name="weight_kg" type="number" step="0.01" class="form-control" placeholder="Enter weight in kg" />
+            </div>
+
+            <div class="form-group">
+              <label>Notes</label>
+              <textarea name="notes" class="form-control" placeholder="Enter notes about the health check"></textarea>
+            </div>
+
+            <div class="form-buttons">
+              <button class="btn" type="button" data-clear>Cancel</button>
+              <button class="btn btn-primary" type="submit">Save Record</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <footer class="footer"><span>© 2026 Wildlife Conservation Monitoring Database Management System.</span><span>WCMDMS v1.0.0 🌿</span></footer>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>

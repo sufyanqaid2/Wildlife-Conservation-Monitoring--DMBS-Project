@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reports</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body data-page="reports">
+  <div class="app">
+
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo-circle">🦌</div>
+        <div>
+          <h2>WCMDMS</h2>
+          <p>Wildlife Conservation<br>Monitoring Database<br>Management System</p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="animals.html">🐾 Animals</a>
+        <a href="health_records.html">💓 Health Records</a>
+        <a href="sightings.html">🔭 Sightings</a>
+        <a href="threats.html">⚠️ Threats</a>
+        <a href="rangers.html">👤 Rangers</a>
+        <a href="zones.html">📍 Zones</a>
+        <a href="users.html">👥 Users & Roles</a>
+        <a class="active" href="reports.html">📊 Reports</a>
+      </nav>
+
+      <div class="profile-box">
+        <div class="avatar">👤</div>
+        <div>
+          <b class="current-user-name">admin1</b>
+          <p class="current-user-role">Administrator</p>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="page-title">
+          <h1>📊 Reports</h1>
+          <p>Run management reports and database function/procedure operations.</p>
+        </div>
+
+        <div class="top-actions">
+          <span id="currentDate">📅 Loading date...</span>
+          <button class="btn btn-outline" onclick="logout()">Logout</button>
+        </div>
+      </header>
+
+      <!-- REPORT STATISTIC CARDS -->
+      <section class="cards">
+        <div class="card stat-card">
+          <div class="stat-icon green">🐾</div>
+          <div>
+            <h3 id="reportAnimalsCount">0</h3>
+            <p>Animals<br>Total registered</p>
+          </div>
+        </div>
+
+        <div class="card stat-card">
+          <div class="stat-icon blue">🔭</div>
+          <div>
+            <h3 id="reportSightingsCount">0</h3>
+            <p>Sightings<br>Total records</p>
+          </div>
+        </div>
+
+        <div class="card stat-card">
+          <div class="stat-icon orange">⚠️</div>
+          <div>
+            <h3 id="reportThreatsCount">0</h3>
+            <p>Threats<br>Total reports</p>
+          </div>
+        </div>
+
+        <div class="card stat-card">
+          <div class="stat-icon purple">🗺</div>
+          <div>
+            <h3 id="reportZonesCount">0</h3>
+            <p>Zones<br>Conservation areas</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- MANAGEMENT SQL REPORTS -->
+      <section class="grid-2">
+
+        <div class="table-card">
+          <div class="table-header">
+            <div>
+              <h3>Available Management Reports</h3>
+              <p style="color:#6b7280; margin-top:6px;">
+                Click any report button to display clear management information below.
+              </p>
+            </div>
+          </div>
+
+          <div class="report-buttons">
+            <button class="btn btn-primary" onclick="runReport('animalsPerZone')">
+              Animals per Zone
+            </button>
+
+            <button class="btn btn-primary" onclick="runReport('avgWeightSpecies')">
+              Average Weight per Species
+            </button>
+
+            <button class="btn btn-primary" onclick="runReport('unresolvedThreats')">
+              Unresolved Threats
+            </button>
+
+            <button class="btn btn-primary" onclick="runReport('sightingsByZone')">
+              Sightings by Zone
+            </button>
+
+            <button class="btn btn-primary" onclick="runReport('animalsNotSeen')">
+              Animals Not Seen in 30 Days
+            </button>
+
+            <button class="btn btn-primary" onclick="runReport('sightingsByRanger')">
+              Sightings by Ranger
+            </button>
+
+            <button class="btn btn-primary" onclick="runReport('totalSightingsAnimal')">
+              Total Sightings per Animal
+            </button>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3>Report Explanation</h3>
+          <p id="reportDescription" class="small-text">
+            Select a report from the left side. The result will be displayed in a clear table.
+          </p>
+
+        <!--  <div class="card" style="background:#f0fdf4;">
+            <b>Database Requirement</b>
+            <p style="margin-top:10px;color:#4b5563;">
+              This page supports the project requirement for query and result display from the client side using the database connection.
+            </p>
+          </div>
+        </div>  -->
+
+      </section>
+
+      <br>
+
+      <!-- PL/pgSQL FUNCTIONS / PROCEDURES -->
+      <section class="table-card">
+        <div class="table-header">
+          <div>
+            <h3>PL/pgSQL Functions / Procedures Buttons</h3>
+            <p style="color:#6b7280; margin-top:6px;">
+            </p>
+          </div>
+        </div>
+
+        <div class="procedure-box">
+
+          <div class="procedure-card">
+            <h4>Search Sightings by User ID</h4>
+            <p>
+              Calls a database function to count how many sightings were reported by a selected user.
+            </p>
+
+            <input
+              id="procUserId"
+              class="form-control"
+              type="number"
+              placeholder="Enter user_id, example: 2"
+            />
+
+            <button class="btn btn-primary" onclick="callGetSightingsByUser()">
+              Run Function
+            </button>
+          </div>
+
+          <div class="procedure-card">
+            <h4>Search Animals by Zone</h4>
+            <p>
+              Calls a database function to search zones by name and count animals inside matching zones.
+            </p>
+
+            <input
+              id="procZoneName"
+              class="form-control"
+              type="text"
+              placeholder="Enter zone name, example: Forest"
+            />
+
+            <button class="btn btn-primary" onclick="callSearchByZone()">
+              Run Function
+            </button>
+          </div>
+
+          <div class="procedure-card">
+            <h4>Count Animal Sightings</h4>
+            <p>
+              Calls a database function to count how many times a specific animal was seen.
+            </p>
+
+            <input
+              id="procAnimalId"
+              class="form-control"
+              type="number"
+              placeholder="Enter animal_id, example: 1"
+            />
+
+            <button class="btn btn-primary" onclick="callCountAnimalSightings()">
+              Run Function
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <br>
+
+      <!-- RESULT TABLE -->
+      <section class="table-card">
+        <div class="table-header">
+          <div>
+            <h3 id="reportTitle">Report Result</h3>
+            <p id="reportSubtitle" style="color:#6b7280; margin-top:6px;">
+              No report selected yet.
+            </p>
+          </div>
+
+          <button class="btn" onclick="exportTable('reportsResultTable','report_result.csv')">
+            Export
+          </button>
+        </div>
+
+        <div class="table-wrap">
+          <table id="reportsResultTable">
+            <thead id="reportsTableHead">
+              <tr>
+                <th>Message</th>
+              </tr>
+            </thead>
+
+            <tbody id="reportsTableBody">
+              <tr>
+                <td>Please select a report or run a function/procedure button.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span>© 2026 Wildlife Conservation Monitoring Database Management System.</span>
+        <span>WCMDMS v1.0.0 🌿</span>
+      </footer>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>

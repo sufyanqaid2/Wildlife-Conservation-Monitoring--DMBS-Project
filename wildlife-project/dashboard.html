@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body data-page="dashboard">
+  <div class="app">
+
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo-circle">🦌</div>
+        <div>
+          <h2>WCMDMS</h2>
+          <p>Wildlife Conservation<br>Monitoring Database<br>Management System</p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a class="active" href="dashboard.html">🏠 Dashboard</a>
+        <a href="animals.html">🐾 Animals</a>
+        <a href="health_records.html">💓 Health Records</a>
+        <a href="sightings.html">🔭 Sightings</a>
+        <a href="threats.html">⚠️ Threats</a>
+        <a href="rangers.html">👤 Rangers</a>
+        <a href="zones.html">📍 Zones</a>
+        <a href="users.html">👥 Users & Roles</a>
+        <a href="reports.html">📊 Reports</a>
+      </nav>
+
+      <div class="profile-box">
+        <div class="avatar">👤</div>
+        <div>
+          <b class="current-user-name">admin1</b>
+          <p class="current-user-role">Administrator</p>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="page-title">
+          <h1>Welcome back, <span class="current-user-name">admin1</span> 🌿</h1>
+          <p>Wildlife Conservation Monitoring Database Management System</p>
+        </div>
+
+        <div class="top-actions">
+          <span id="currentDate">📅 Loading date...</span>
+          <button class="btn btn-outline" onclick="logout()">Logout</button>
+        </div>
+      </header>
+
+      <!-- TOP STATISTIC CARDS - ALL CONNECTED TO app.js -->
+      <section class="cards">
+        <div class="card stat-card">
+          <div class="stat-icon green">🐾</div>
+          <div>
+            <h3 id="statAnimals">0</h3>
+            <p>Animals<br></p>
+          </div>
+        </div>
+
+        <div class="card stat-card">
+          <div class="stat-icon red">💓</div>
+          <div>
+            <h3 id="statHealth">0</h3>
+            <p>Health Records<br></p>
+          </div>
+        </div>
+
+        <div class="card stat-card">
+          <div class="stat-icon blue">🔭</div>
+          <div>
+            <h3 id="statSightings">0</h3>
+            <p>Sightings<br></p>
+          </div>
+        </div>
+
+        <div class="card stat-card">
+          <div class="stat-icon orange">⚠️</div>
+          <div>
+            <h3 id="statThreats">0</h3>
+            <p>Threats<br></p>
+          </div>
+        </div>
+
+        <div class="card stat-card">
+          <div class="stat-icon green">👤</div>
+          <div>
+            <h3 id="statRangers">0</h3>
+            <p>Rangers<br></p>
+          </div>
+        </div>
+
+        <div class="card stat-card">
+          <div class="stat-icon purple">👥</div>
+          <div>
+            <h3 id="statUsers">0</h3>
+            <p>Users<br></p>
+          </div>
+        </div>
+
+        <div class="card stat-card">
+          <div class="stat-icon green">🗺</div>
+          <div>
+            <h3 id="statZones">0</h3>
+            <p>Zones<br></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- MAIN DASHBOARD PANELS -->
+      <section class="dashboard-layout">
+
+        <!-- RECENT ACTIVITY - DYNAMIC FROM SUPABASE -->
+        <div class="panel">
+          <h3>〽 Recent Activity</h3>
+          <div id="recentActivityList"></div>
+        </div>
+
+        <!-- SIGHTINGS OVER TIME - DYNAMIC CLEAR BAR STYLE -->
+        <div class="panel">
+          <h3>📈 Sightings Over Time</h3>
+          <div id="sightingsOverTimeContainer"></div>
+        </div>
+
+        <!-- ZONES OVERVIEW - DYNAMIC FROM SUPABASE -->
+        <div class="panel">
+          <h3>🗺 Zones Overview</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Zone Name</th>
+                <th>Area</th>
+                <th>Habitat</th>
+              </tr>
+            </thead>
+            <tbody id="zoneOverview"></tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <br>
+
+      <!-- SECOND DASHBOARD ROW -->
+      <section class="grid-3">
+
+        <!-- TOP ANIMALS - DYNAMIC FROM SUPABASE -->
+        <div class="table-card">
+          <div class="table-header">
+            <h3>Top Animals</h3>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Animal</th>
+                <th>Species</th>
+                <th>Status</th>
+                <th>Birth Year</th>
+              </tr>
+            </thead>
+            <tbody id="topAnimals"></tbody>
+          </table>
+        </div>
+
+        <!-- THREATS BY SEVERITY - DYNAMIC CLEAR BAR STYLE -->
+        <div class="panel">
+          <h3>Threats by Severity</h3>
+          <div id="threatsSeverityContainer"></div>
+        </div>
+
+        <!-- RECENT THREATS - DYNAMIC FROM SUPABASE -->
+        <div class="table-card">
+          <div class="table-header">
+            <h3>Recent Threats</h3>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Zone</th>
+                <th>Severity</th>
+                <th>Date</th>
+                <th>Resolved</th>
+              </tr>
+            </thead>
+            <tbody id="recentThreats"></tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <footer class="footer">
+        <span>© 2026 Wildlife Conservation Monitoring Database Management System.</span>
+        <span>WCMDMS v1.0.0 🌿</span>
+      </footer>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>

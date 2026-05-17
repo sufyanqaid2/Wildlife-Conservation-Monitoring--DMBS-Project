@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zones</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body data-page="zones">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><div class="logo-circle">🦌</div><div><h2>WCMDMS</h2><p>Wildlife Conservation<br>Monitoring Database<br>Management System</p></div></div>
+      <nav class="nav">
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="animals.html">🐾 Animals</a>
+        <a href="health_records.html">💓 Health Records</a>
+        <a href="sightings.html">🔭 Sightings</a>
+        <a href="threats.html">⚠️ Threats</a>
+        <a href="rangers.html">👤 Rangers</a>
+        <a class="active" href="zones.html">📍 Zones</a>
+        <a href="users.html">👥 Users & Roles</a>
+        <a href="reports.html">📊 Reports</a>
+      </nav>
+      <div class="profile-box"><div class="avatar">👤</div><div><b class="current-user-name">admin1</b><p class="current-user-role">Administrator</p></div></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="page-title"><h1>Zones 🗺</h1><p>Manage conservation zones and their habitat information.</p></div>
+        <div class="top-actions">
+          <span id="currentDate">📅 Loading date...</span>
+          <button class="btn btn-outline" onclick="logout()">Logout</button>
+        </div>
+      </header>
+
+      <section class="cards">
+        <div class="card stat-card"><div class="stat-icon green">🗺</div><div><h3>5</h3><p>Total Zones<br></p></div></div>
+        <div class="card stat-card"><div class="stat-icon green">🌲</div><div><h3>2</h3><p>Forest Zones<br></p></div></div>
+        <div class="card stat-card"><div class="stat-icon purple">🌊</div><div><h3>1</h3><p>Wetland Zones<br></p></div></div>
+        <div class="card stat-card"><div class="stat-icon orange">🌾</div><div><h3>1</h3><p>Grassland Zones<br></p></div></div>
+        <div class="card stat-card"><div class="stat-icon orange">⛰</div><div><h3>1</h3><p>Desert Zones<br></p></div></div>
+        <div class="card stat-card"><div class="stat-icon blue">🌍</div><div><h3>4</h3><p>Countries<br></p></div></div>
+      </section>
+
+      <section class="grid-2">
+        <div class="table-card">
+          <div class="toolbar">
+            <input id="zoneSearch" class="form-control search-input" placeholder="🔍 Search by zone_id, zone_name, habitat_type, country..." />
+            <button class="btn">Filters</button>
+          </div>
+
+          <div class="table-header"><h3>Zones</h3></div>
+
+          <table id="zonesTable">
+            <thead>
+              <tr><th>zone_id</th><th>zone_name</th><th>area_km2</th><th>habitat_type</th><th>country</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="zonesBody"></tbody>
+          </table>
+        </div>
+
+        <div class="form-card">
+          <h3>Add / Edit Zone</h3>
+
+          <form id="zoneForm" data-table="zones">
+            <div class="form-group">
+              <label>zone_id</label>
+              <input name="zone_id" class="form-control" placeholder="Auto-generated" disabled />
+            </div>
+
+            <div class="form-group">
+              <label>zone_name</label>
+              <input name="zone_name" class="form-control" placeholder="Enter zone name" required />
+            </div>
+
+            <div class="form-group">
+              <label>area_km2</label>
+              <input name="area_km2" type="number" step="0.01" class="form-control" placeholder="Enter area" required />
+            </div>
+
+            <div class="form-group">
+              <label>habitat_type</label>
+              <select name="habitat_type" class="form-control" required>
+                <option value="">Select habitat type</option>
+                <option>forest</option>
+                <option>grassland</option>
+                <option>wetland</option>
+                <option>desert</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>country</label>
+              <input name="country" class="form-control" placeholder="Enter country" required />
+            </div>
+
+            <div class="form-buttons">
+              <button class="btn" type="button" data-clear>Cancel</button>
+              <button class="btn btn-primary" type="submit">Save Zone</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <footer class="footer"><span>© 2026 Wildlife Conservation Monitoring Database Management System.</span><span>WCMDMS v1.0.0 🌿</span></footer>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>

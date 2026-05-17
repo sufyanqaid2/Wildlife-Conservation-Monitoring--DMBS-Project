@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rangers</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body data-page="rangers">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><div class="logo-circle">🦌</div><div><h2>WCMDMS</h2><p>Wildlife Conservation<br>Monitoring Database<br>Management System</p></div></div>
+      <nav class="nav">
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="animals.html">🐾 Animals</a>
+        <a href="health_records.html">💓 Health Records</a>
+        <a href="sightings.html">🔭 Sightings</a>
+        <a href="threats.html">⚠️ Threats</a>
+        <a class="active" href="rangers.html">👤 Rangers</a>
+        <a href="zones.html">📍 Zones</a>
+        <a href="users.html">👥 Users & Roles</a>
+        <a href="reports.html">📊 Reports</a>
+      </nav>
+      <div class="profile-box"><div class="avatar">👤</div><div><b class="current-user-name">admin1</b><p class="current-user-role">Administrator</p></div></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="page-title"><h1>Rangers 👤</h1><p>Manage ranger assignments and their linked user accounts and zones.</p></div>
+        <div class="top-actions">
+          <span id="currentDate">📅 Loading date...</span>
+          <button class="btn btn-outline" onclick="logout()">Logout</button>
+        </div>
+      </header>
+
+      <section class="cards">
+        <div class="card stat-card"><div class="stat-icon green">👥</div><div><h3>2</h3><p>Total Rangers<br></p></div></div>
+        <div class="card stat-card"><div class="stat-icon green">🗺</div><div><h3>5</h3><p>Active Zones Covered<br></p></div></div>
+      </section>
+
+      <section class="grid-2">
+        <div class="table-card">
+          <div class="toolbar">
+            <input id="rangerSearch" class="form-control search-input" placeholder="🔍 Search by ranger_id, full_name, phone..." />
+            <button class="btn">Filter</button>
+            <button class="btn">Sort</button>
+          </div>
+
+          <table id="rangersTable">
+            <thead>
+              <tr><th>ranger_id</th><th>User ID</th><th>zone_id</th><th>full_name</th><th>phone</th><th>hire_date</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="rangersBody"></tbody>
+          </table>
+        </div>
+
+        <div class="form-card">
+          <h3>👤 Add / Edit Ranger</h3>
+
+          <form id="rangerForm" data-table="rangers">
+            <div class="form-group">
+              <label>ranger_id</label>
+              <input name="ranger_id" class="form-control" placeholder="Auto-generated" disabled />
+            </div>
+
+            <div class="form-group">
+              <label>Ranger User</label>
+              <select id="rangerUserSelect" name="user_id" class="form-control" required>
+                  <option value="">Select ranger user</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>zone_id</label>
+              <select id="zoneSelect" name="zone_id" class="form-control" required>
+                <option value="">Select zone</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>full_name</label>
+              <input name="full_name" class="form-control" placeholder="Enter full name" required />
+            </div>
+
+            <div class="form-group">
+              <label>phone</label>
+              <input name="phone" class="form-control" placeholder="Enter phone number" required />
+            </div>
+
+            <div class="form-group">
+              <label>hire_date</label>
+              <input name="hire_date" type="date" class="form-control" required />
+            </div>
+
+            <div class="form-buttons">
+              <button class="btn" type="button" data-clear>Cancel</button>
+              <button class="btn btn-primary" type="submit">Save Ranger</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <footer class="footer"><span>© 2026 Wildlife Conservation Monitoring Database Management System.</span><span>WCMDMS v1.0.0 🌿</span></footer>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>

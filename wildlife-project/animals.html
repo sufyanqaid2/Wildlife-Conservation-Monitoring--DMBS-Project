@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animals</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body data-page="animals">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><div class="logo-circle">🦌</div><div><h2>WCMDMS</h2><p>Wildlife Conservation<br>Monitoring Database<br>Management System</p></div></div>
+      <nav class="nav">
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a class="active" href="animals.html">🐾 Animals</a>
+        <a href="health_records.html">💓 Health Records</a>
+        <a href="sightings.html">🔭 Sightings</a>
+        <a href="threats.html">⚠️ Threats</a>
+        <a href="rangers.html">👤 Rangers</a>
+        <a href="zones.html">📍 Zones</a>
+        <a href="users.html">👥 Users & Roles</a>
+        <a href="reports.html">📊 Reports</a>
+      </nav>
+      <div class="profile-box"><div class="avatar">👤</div><div><b class="current-user-name">admin1</b><p class="current-user-role">Administrator</p></div></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="page-title">
+          <h1>🐾 Animals</h1>
+          <p>Manage and track all registered animals in the system.</p>
+        </div>
+        <div class="top-actions">
+          <span id="currentDate">📅 Loading date...</span>
+          <button class="btn btn-outline" onclick="logout()">Logout</button>
+        </div>
+      </header>
+
+      <section class="cards">
+        <div class="card stat-card"><div class="stat-icon green">🐾</div><div><h3>8</h3><p>Total Animals<br>Registered</p></div></div>
+        <div class="card stat-card"><div class="stat-icon blue">♂</div><div><h3>4</h3><p>Male<br>Animals</p></div></div>
+        <div class="card stat-card"><div class="stat-icon purple">♀</div><div><h3>4</h3><p>Female<br>Animals</p></div></div>
+        <div class="card stat-card"><div class="stat-icon green">〽</div><div><h3>7</h3><p>Alive<br>Animals</p></div></div>
+        <div class="card stat-card"><div class="stat-icon red">☠️</div><div><h3>1</h3><p>Dead<br>Animals</p></div></div>
+        <div class="card stat-card"><div class="stat-icon green">🗺</div><div><h3>5</h3><p>Zones<br>Represented</p></div></div>
+      </section>
+
+      <section class="toolbar">
+        <input id="animalSearch" class="form-control search-input" placeholder="🔍 Search by name, species..." />
+        <button class="btn btn-primary">Filter</button>
+        <button onclick="location.reload()" class="btn">Reset</button>
+      </section>
+
+      <section class="grid-2">
+        <div class="table-card">
+          <div class="table-header">
+            <div><h3>🐾 Animals List</h3><p>View and manage all animals.</p></div>
+            <button onclick="exportTable('animalsTable','animals.csv')" class="btn">Export</button>
+          </div>
+
+          <div class="table-wrap">
+            <table id="animalsTable">
+              <thead>
+                <tr>
+                  <th>ID</th><th>Name</th><th>Species</th><th>Gender</th><th>Birth Year</th><th>Status</th><th>Zone</th><th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="animalsBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3>🐾 Add / Edit Animal</h3>
+          <p class="small-text">Create a new animal record or update details.</p>
+
+          <form id="animalForm" data-table="animals">
+            <div class="form-group">
+              <label>Animal ID</label>
+              <input name="animal_id" class="form-control" placeholder="Auto-generated" disabled />
+            </div>
+
+            <div class="form-group">
+              <label>Name *</label>
+              <input name="name" class="form-control" placeholder="Enter animal name" required />
+            </div>
+
+            <div class="form-group">
+              <label>Species *</label>
+              <input name="species" class="form-control" placeholder="Enter species" required />
+            </div>
+
+            <div class="form-group">
+              <label>Gender *</label>
+              <select name="gender" class="form-control" required>
+                <option value="">Select gender</option>
+                <option>male</option>
+                <option>female</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Birth Year *</label>
+                <input name="birth_year" type="number" class="form-control" placeholder="YYYY" required />
+              </div>
+
+              <div class="form-group">
+                <label>Status *</label>
+                <select name="status" class="form-control" required>
+                  <option value="">Select status</option>
+                  <option>alive</option>
+                  <option>dead</option>
+                  <option>unknown</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Zone *</label>
+              <select id="zoneSelect" name="zone_id" class="form-control" required>
+                <option value="">Select zone</option>
+              </select>
+            </div>
+
+            <div class="form-buttons">
+              <button class="btn btn-primary" type="submit">💾 Save Animal</button>
+              <button class="btn" type="button" data-clear>Clear</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <footer class="footer"><span>© 2026 Wildlife Conservation Monitoring Database Management System.</span><span>WCMDMS v1.0.0 🌿</span></footer>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>

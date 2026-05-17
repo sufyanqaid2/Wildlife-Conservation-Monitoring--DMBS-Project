@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Users & Roles</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body data-page="users">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><div class="logo-circle">🦌</div><div><h2>WCMDMS</h2><p>Wildlife Conservation<br>Monitoring Database<br>Management System</p></div></div>
+      <nav class="nav">
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="animals.html">🐾 Animals</a>
+        <a href="health_records.html">💓 Health Records</a>
+        <a href="sightings.html">🔭 Sightings</a>
+        <a href="threats.html">⚠️ Threats</a>
+        <a href="rangers.html">👤 Rangers</a>
+        <a href="zones.html">📍 Zones</a>
+        <a class="active" href="users.html">👥 Users & Roles</a>
+        <a href="reports.html">📊 Reports</a>
+      </nav>
+      <div class="profile-box"><div class="avatar">👤</div><div><b class="current-user-name">admin1</b><p class="current-user-role">Administrator</p></div></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="page-title"><h1>Users & Roles 👥</h1><p>Manage system users, assign roles, and control access permissions.</p></div>
+        <div class="top-actions">
+          <span id="currentDate">📅 Loading date...</span>
+          <button class="btn btn-outline" onclick="logout()">Logout</button>
+        </div>
+      </header>
+
+      <section class="grid-2">
+        <div>
+          <div class="table-card">
+            <div class="table-header"><h3>◔ Role Summary</h3></div>
+
+            <section class="cards" style="grid-template-columns: repeat(4, 1fr); padding:18px;">
+              <div class="card"><h3>admin</h3><h2>1</h2><p>user</p></div>
+              <div class="card"><h3>ranger</h3><h2>2</h2><p>users</p></div>
+              <div class="card"><h3>researcher</h3><h2>1</h2><p>user</p></div>
+              <div class="card"><h3>viewer</h3><h2>1</h2><p>user</p></div>
+            </section>
+          </div>
+
+          <br>
+
+          <div class="table-card">
+            <div class="table-header"><h3>👥 Users</h3></div>
+
+            <div class="toolbar">
+              <input id="userSearch" class="form-control search-input" placeholder="🔍 Search users by username, email, or role..." />
+              <button class="btn">Filters</button>
+            </div>
+
+            <table id="usersTable">
+              <thead>
+                <tr><th>User ID</th><th>Username</th><th>Email</th><th>Role</th><th>Created At</th><th>Status</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="usersBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3>👤 Create / Edit User</h3>
+
+          <form id="userForm" data-table="users">
+            <div class="form-group">
+              <label>User ID</label>
+              <input name="user_id" class="form-control" placeholder="Auto-generated" disabled />
+            </div>
+
+            <div class="form-group">
+              <label>Username *</label>
+              <input name="username" class="form-control" placeholder="Enter username" required />
+            </div>
+
+            <div class="form-group">
+              <label>Email *</label>
+              <input name="email" type="email" class="form-control" placeholder="Enter email address" required />
+            </div>
+
+            <div class="form-group">
+              <label>Role *</label>
+              <select name="role" class="form-control" required>
+                <option value="">Select role</option>
+                <option value="admin">admin</option>
+                <option value="ranger">ranger</option>
+                <option value="researcher">researcher</option>
+                <option value="viewer">viewer</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Password *</label>
+              <input name="password" type="password" class="form-control" placeholder="Enter password" />
+            </div>
+
+            <div class="form-group">
+              <label>Confirm Password *</label>
+              <input id="confirmPassword" type="password" class="form-control" placeholder="Confirm password" />
+            </div>
+
+        
+
+            <div class="form-buttons">
+              <button class="btn" type="button" data-clear>Cancel</button>
+              <button class="btn btn-primary" type="submit">Save User</button>
+            </div>
+          </form>
+
+          <br>
+
+          <div class="card" style="background:#f0fdf4;">
+            <b>🔒 Password Policy</b>
+            <p style="margin-top:10px;color:#4b5563;">
+              Passwords must be at least 8 characters .
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer"><span>© 2026 Wildlife Conservation Monitoring Database Management System.</span><span>WCMDMS v1.0.0 🌿</span></footer>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
